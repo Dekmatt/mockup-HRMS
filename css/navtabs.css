@@ -1,0 +1,44 @@
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .nav-tabs a {
+    padding: 10px 16px;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .nav-tabs a:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .nav-tabs a.active {
+    background: #2b6cb0;
+    color: white;
+  }
+
+  @media (max-width: 880px) {
+    .nav-tabs {
+      flex-direction: column;
+      gap: 2px;
+    }
+    .nav-tabs a {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 800px; /* Adjust this value to make the body thinner */
+      margin: 40px auto;
+      padding: 16px; /* Adjust padding as needed */
+    }
+  }

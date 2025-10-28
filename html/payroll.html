@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <style>
+    :root{--accent:#2b6cb0;--muted:#6b7280;--bg:#f7fafc}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .container{max-width:1500px;margin:5px auto;padding:5px}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+    a.button{background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
+    .nav-tabs{display:flex;flex-wrap:wrap;gap:4px;padding:10px;background:#f8fafc;border-radius:8px;margin-bottom:20px}
+    .nav-tabs a{padding:10px 16px;color:#64748b;text-decoration:none;border-radius:6px;font-size:14px;transition:all 0.2s}
+    .nav-tabs a.active{background:#2b6cb0;color:white}
+    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .form-actions{padding:20px;display:flex;justify-content:flex-end;background:linear-gradient(to right,#f8fafc,#f1f5f9);border-top:1px solid #e2e8f0}
+    .save-button{display:flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
+    .save-icon{font-size:16px}
+    input:required, select:required {border-left:3px solid #667eea!important}
+    input:required:invalid, select:required:invalid {border-left:3px solid #ef4444!important}
+
+    .biodata-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);background-size:200% 200%;animation:gradientShift 8s ease infinite;color:white;padding:20px 28px;font-size:20px;font-weight:800;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+    .section-header{background:linear-gradient(120deg,#f8fafc 0%,#e0e7ff 50%,#f8fafc 100%);padding:14px 24px;font-weight:800;font-size:13px;border-left:5px solid #667eea;margin-top:0;color:#1e293b;text-transform:uppercase;letter-spacing:1.5px}
+    .form-container{background-color:white;border-radius:0 0 16px 16px;overflow:hidden;position:relative}
+    .form-row{display:grid;grid-template-columns:180px 1fr 180px 1fr;border-bottom:1px solid #e2e8f0;min-height:56px;align-items:center;position:relative;animation:fadeInUp .6s ease forwards;opacity:0}
+    .form-row.single{grid-template-columns:180px 1fr}
+    .form-label{padding:14px 18px;background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 100%);border-right:2px solid #e2e8f0;font-size:13px;font-weight:700;color:#334155;display:flex;align-items:center;gap:10px}
+    .form-input{padding:12px 16px;border-right:1px solid #e2e8f0}
+    .form-input input[type="text"],.form-input input[type="date"],.form-input select{width:100%;padding:12px 16px;border:2px solid #e2e8f0;font-size:13px;border-radius:10px;background:linear-gradient(to bottom,#ffffff,#fafbfc);font-weight:500;color:#1e293b}
+    .radio-group{display:flex;gap:16px;align-items:center}
+    .card{box-shadow:0 20px 60px rgba(0,0,0,0.12);border:1px solid #e2e8f0;position:relative;overflow:hidden;margin-bottom:20px}
+    .form-container::after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(to right,#667eea,#764ba2,#f093fb);background-size:200% 100%;animation:gradientShift 4s ease infinite}
+
+    /* table */
+    .table-container{padding:16px}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(11,22,40,0.06)}
+    th,td{padding:10px 12px;border-bottom:1px solid #eef2f7;text-align:left;font-size:13px}
+    th{background:#f8fafc;color:#334155;font-weight:700;border-bottom:1px solid #e6eef8}
+    tbody tr:hover td{background:#fbfbff}
+    .empty-row{color:#64748b;text-align:center;padding:20px}
+
+    /* toast */
+    .toast{position:fixed;top:20px;right:20px;padding:12px 18px;border-radius:8px;color:#fff;transform:translateX(120%);transition:transform .25s ease;z-index:1200;font-weight:700;display:flex;align-items:center;gap:10px}
+    .toast.show{transform:translateX(0)}
+    .toast.success{background:#10b981}
+    .toast.error{background:#ef4444}
+    @media (max-width:768px){.container{padding:12px}.form-row{grid-template-columns:140px 1fr 140px 1fr}}
+  </style>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-profile">
+        <img class="profile-avatar" alt="Avatar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><circle cx='32' cy='32' r='32' fill='%232b6cb0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='28'>F</text></svg>" />
+        <div class="profile-info">
+            <h2>Fatihah</h2>
+            <h3>INT3 - Intern</h3>
+        </div>
+      </div>
+
+      <div class="sidebar-search">
+        <input type="search" placeholder="search" aria-label="Search" />
+      </div>
+
+      <ul class="sidebar-menu">
+        <li><a href="home.html">🏠<span class="icon"> Home</span></a></li>
+        <li><a href="organizational.html">🏢<span class="icon"> Organizational</span></a></li>
+        <li><a href="profile.html" class="active">👤<span class="icon"> Profile</span></a></li>
+        <li><a href="attendance.html">📅<span class="icon"> Attendance</span></a></li>
+        <li><a href="leave.html">✈️<span class="icon"> Leave</span></a></li>
+        <li><a href="benefit&claim.html">💳<span class="icon"> Benefit & Claim</span></a></li>
+        <li><a href="overtime.html">⏰<span class="icon"> Overtime</span></a></li>
+        <li><a href="payrollside.html">💰<span class="icon"> Payroll</span></a></li>
+        <li><a href="learn&develop.html">🎓<span class="icon"> Learn & Develop</span></a></li>
+        <li><a href="HRAdmin.html">⚙️<span class="icon"> HR Admin</span></a></li>
+        <li><a href="recruitement.html">🔍<span class="icon"> Recruitement</span></a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content" style="margin-left:220px;padding:16px">
+      <div class="container">
+        <div class="nav-tabs">
+                    <a href="profile.html">Biodata</a>
+                    <a href="nxofkin.html">Next of Kin</a>
+                    <a href="payroll.html" class="active">Payroll Detail</a>
+                    <a href="qualification.html">Qualification</a>
+                    <a href="jobdetail.html">Job Detail</a>
+                    <a href="expertise.html">Expertise</a>
+                    <a href="emphistory.html">Emp History</a>
+                    <a href="health.html">Health</a>
+                    <a href="membership.html">Membership</a>
+                    <a href="interest.html">Interest</a>
+                    <a href="performance.html">Performance</a>
+                    <a href="beneficiary.html">Beneficiary</a>
+                </div>
+
+        <div class="card">
+          <div class="biodata-header">
+            <div class="biodata-header-content">
+              <div class="biodata-icon">💳</div>
+              <span>Payroll Detail</span>
+            </div>
+          </div>
+
+          <div class="form-container">
+            <form id="biodataForm" novalidate>
+              <div class="form-row" style="opacity:1">
+                <div class="form-label">Employee Name *</div>
+                <div class="form-input">
+                  <select name="empname" required>
+                    <option value="">Please select Employee Name</option>
+                    <option>Mr. A</option>
+                    <option>Mrs. B</option>
+                    <option>Ms. C</option>
+                    <option>Dr. D</option>
+                  </select>
+                </div>
+
+                <div class="form-label">Account Type *</div>
+                <div class="form-input">
+                  <select name="accType" required>
+                    <option value="">Please select Account Type</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                  </select>
+                </div>
+
+                <div class="form-label">Bank / Company Code *</div>
+                <div class="form-input">
+                  <select name="bCode" required>
+                    <option value="">Please select Bank / Company Code</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                  </select>
+                </div>                
+
+                <div class="form-label">Account Number *</div>
+                <div class="form-input">
+                  <input type="text" name="accNum" required>
+                </div>
+
+                <div class="form-label">Old IC Indicator *</div>
+                <div class="form-input">
+                  <select name="oldIC" required>
+                    <option value="">Yes Or No</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+                
+                <div class="form-label">Payroll Bank Indicator *</div>
+                <div class="form-input">
+                  <select name="proll" required>
+                    <option value="">Yes Or No</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+                </div>
+
+              <div class="form-actions">
+                <button type="submit" class="save-button">
+                  <span class="save-icon">💾</span>
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="section-header" style="margin-top:12px">Saved Records</div>
+          <div class="table-container">
+            <table id="recordsTable" aria-label="Saved records">
+              <thead>
+                <tr>
+                  <th>Employee Name</th>
+                  <th>Account Type</th>
+                  <th>Bank / Company Code</th>
+                  <th>Account Number</th>
+                  <th>Old IC Indicator</th>
+                  <th>Payroll Bank Indicator</th>
+                </tr>
+              </thead>
+              <tbody id="recordsBody">
+                <tr class="empty-row"><td colspan="16">No records saved yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </main>
+</div>
+
+<div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <span id="toastIcon">✅</span>
+  <span id="toastMessage">Saved</span>
+</div>
+
+<script>
+(function(){
+  const form = document.getElementById('biodataForm');
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toastMessage');
+  const toastIcon = document.getElementById('toastIcon');
+  const recordsBody = document.getElementById('recordsBody');
+  let records = [];
+
+  function showToast(message, type){
+    toastMessage.textContent = message;
+    toastIcon.textContent = type === 'success' ? '✅' : '❌';
+    toast.className = 'toast ' + (type === 'success' ? 'success show' : 'error show');
+    setTimeout(()=> toast.classList.remove('show'), 3000);
+  }
+
+  function focusFirstInvalid(formEl){
+    const firstInvalid = formEl.querySelector(':invalid');
+    if(firstInvalid) firstInvalid.focus();
+  }
+
+  function clearEmptyRow(){
+    const empty = recordsBody.querySelector('.empty-row');
+    if(empty) empty.remove();
+  }
+
+  function appendRecordRow(data){
+    clearEmptyRow();
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${escapeHtml(data.empname)}</td>
+      <td>${escapeHtml(data.accType)}</td>
+      <td>${escapeHtml(data.bCode)}</td>
+      <td>${escapeHtml(data.accNum)}</td>
+      <td>${escapeHtml(data.oldIC)}</td>
+      <td>${escapeHtml(data.proll)}</td>
+
+    `;
+    recordsBody.appendChild(tr);
+  }
+
+  function escapeHtml(str){
+    if(str === undefined || str === null) return '';
+    return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+  }
+
+  function gatherFormData(){
+    const formData = new FormData(form);
+    const staffRadio = form.querySelector('input[name="staffId"]:checked');
+    let staffIdValue = staffRadio ? staffRadio.value : 'auto';
+    if(staffIdValue === 'auto'){
+      staffIdValue = 'AUTO-' + String(Date.now()).slice(-6);
+    } else {
+      // manual: request input
+      let manual = prompt('Enter Staff ID (manual):');
+      if(!manual){
+        return { error: 'Manual staff ID required' };
+      }
+      staffIdValue = manual.trim();
+    }
+
+    return {
+      staffId: staffIdValue,
+      empname: formData.get('empname') || '',
+      accType: formData.get('accType') || '',
+      bCode: formData.get('bCode') || '',
+      accNum: formData.get('accNum') || '',
+      oldIC: formData.get('oldIC') || '',
+      proll: formData.get('proll') || '',
+    };
+  }
+
+  function handleSubmit(e){
+    e.preventDefault();
+    if(!form.checkValidity()){
+      Array.from(form.elements).forEach(el => {
+        if(typeof el.reportValidity === 'function') try{ el.reportValidity(); }catch{}
+      });
+      focusFirstInvalid(form);
+      showToast('Incomplete details. Please fill required fields.', 'error');
+      return false;
+    }
+
+    const data = gatherFormData();
+    if(data.error){
+      showToast(data.error, 'error');
+      return false;
+    }
+
+    // push record and render row
+    records.push(data);
+    appendRecordRow(data);
+
+    showToast('Data saved successfully!', 'success');
+
+    // reset form but keep radio default to auto
+    form.reset();
+    const autoRadio = form.querySelector('input[name="staffId"][value="auto"]');
+    if(autoRadio) autoRadio.checked = true;
+
+    return false;
+  }
+
+  if(form){
+    form.addEventListener('submit', handleSubmit);
+  }
+})();
+</script>
+</body>
+</html>
