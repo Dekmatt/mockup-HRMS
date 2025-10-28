@@ -1,0 +1,176 @@
+<html>
+
+<head>
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="css/job_app_form.css">
+</head>
+
+<body>
+<div class="main-container">
+    <div class="form-wrapper">
+        <img src="https://meteor.com.my/wp-content/uploads/2020/09/logometeor.png" alt="Hiring Form Illustration" style="width: 200px; height: 100px; display: block; margin: 0 auto;" class="form-image" />
+
+        <form id="employmentForm" action="#" method="POST" enctype="multipart/form-data">
+           
+            <!-- Title and Description -->
+            <div class="form-header">
+                <h2 class="form-title">JOB APPLICATION FORM</h2>
+            </div>
+
+            <!-- Section Bar -->
+            <div class="section-bar">EMPLOYMENT PROFILE</div>
+            <h4>CURRENT EMPLOYMENT</h4>
+
+            <div class="form-group">
+              <label for="curr_company_name" class="form-label">Employer (Company Name)</label>
+              <input type="text" name="curr_company_name" id="curr_company_name" class="form-input" required />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="curr_date_start" class="form-label">Date Joined </label>
+                    <input type="date" name="curr_date_start" id="curr_date_start" class="form-input" required />
+                </div>
+                 <div class="form-group">
+                    <label for="curr_date_resign" class="form-label">Date Resigned </label>
+                    <input type="date" name="curr_date_resign" id="curr_date_resign" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="curr_job_position" class="form-label">Position</label>
+                <input type="text" name="curr_job_position" id="curr_job_position" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="curr_job_description" class="form-label">Job Description</label>
+                <input type="text" name="curr_job_description" id="curr_job_description" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="curr_reason_leave" class="form-label">Reason for Leaving</label>
+                <input type="text" name="curr_reason_leave" id="curr_reason_leave" class="form-input" />
+            </div>
+
+            <h4>PREVIOUS EMPLOYMENT</h4>
+
+            <div class="form-group">
+              <label for="company_name" class="form-label">Employer (Company Name)</label>
+              <input type="text" name="company_name" id="company_name" class="form-input" />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date_start" class="form-label">Date Joined </label>
+                    <input type="date" name="date_start" id="date_start" class="form-input" />
+                </div>
+                 <div class="form-group">
+                    <label for="date_resign" class="form-label">Date Resigned </label>
+                    <input type="date" name="date_resign" id="date_resign" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="job_position" class="form-label">Position</label>
+                <input type="text" name="job_position" id="job_position" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label for="salary" class="form-label">Salary</label>
+                <input type="number" name="salary" id="salary" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label for="reason_leave" class="form-label">Reason for Leaving</label>
+                <input type="text" name="reason_leave" id="reason_leave" class="form-input" />
+            </div>
+
+            <!-- Add & Reset Buttons -->
+            <div class="btn-row">
+                <button type="button" class="btn btn-add" onclick="addEmployment()">Add</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+
+        <!-- Table for added data -->
+        <table id="employmentTable">
+            <thead>
+                <tr>
+                    <th>Employer (Company Name)</th>
+                    <th>Date Joined</th>
+                    <th>Date Resigned</th>
+                    <th>Position </th>
+                    <th>Salary </th>
+                    <th>Reason of Leaving </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <br><br>
+        <!-- Checkbox Section -->
+            <div class="form-group">
+                <label class="form-label">Can the former employer be contacted for reference? </label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="checkbox" name="ref_contact" value="yes" class="form-checkbox" />
+                        Yes 
+                    </label>
+                    <label class="consent-label">
+                        <input type="checkbox" name="ref_contact" value="no" class="form-checkbox" />
+                        No
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Save & Next Section</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function addEmployment() {
+        const company_name = document.getElementById("company_name").value;
+        const date_start = document.getElementById("date_start").value;
+        const date_resign = document.getElementById("date_resign").value;
+        const job_position = document.getElementById("job_position").value;
+        const salary = document.getElementById("salary").value;
+        const reason_leave = document.getElementById("reason_leave").value;
+
+        if (!company_name || !date_start || !job_position || !reason_leave) {
+            alert("Please fill all previous employment fields before adding.");
+            return;
+        }
+
+        const table = document.getElementById("employmentTable").querySelector("tbody");
+        const newRow = table.insertRow();
+
+        newRow.insertCell(0).textContent = company_name;
+        newRow.insertCell(1).textContent = date_start;
+        newRow.insertCell(2).textContent = date_resign;
+        newRow.insertCell(3).textContent = job_position;
+        newRow.insertCell(4).textContent = salary;
+        newRow.insertCell(5).textContent = reason_leave;
+
+        const actionCell = newRow.insertCell(6);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.onclick = function () {
+            newRow.remove();
+        };
+        actionCell.appendChild(deleteBtn);
+
+        // Clear previous employment fields only
+        document.getElementById("company_name").value = "";
+        document.getElementById("date_start").value = "";
+        document.getElementById("date_resign").value = "";
+        document.getElementById("job_position").value = "";
+        document.getElementById("salary").value = "";
+        document.getElementById("reason_leave").value = "";
+    }
+</script>
+
+</body>
+</html>

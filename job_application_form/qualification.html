@@ -1,0 +1,121 @@
+<html>
+<head>
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="css/job_app_form.css">
+</head>
+<body>
+<div class="main-container">
+    <div class="form-wrapper">
+        <img src="https://meteor.com.my/wp-content/uploads/2020/09/logometeor.png" alt="Hiring Form Illustration" style="width: 200px; height: 100px; display: block; margin: 0 auto;" class="form-image" />
+        <form id="educationForm">
+            <div class="form-header">
+                <h2 class="form-title">JOB APPLICATION FORM</h2>
+            </div>
+
+            <div class="section-bar">EDUCATION BACKGROUND</div>
+
+            <div class="form-group">
+                <label for="qualification" class="form-label">Qualification</label>
+                <select name="qualification" id="qualification" class="form-select" required>
+                    <option value="">-- Please Select --</option>
+                    <option value="SPM">SPM</option>
+                    <option value="STPM">STPM / Foundation / Matriculation</option> 
+                    <option value="Diploma">Diploma</option>
+                    <option value="Degree">Degree</option>
+                    <option value="Master">Master</option>
+                    <option value="PhD">PhD</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="institution" class="form-label">Institution</label>
+                <input type="text" name="institution" id="institution" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="cert_title" class="form-label">Certificate Title</label>
+                <input type="text" name="cert_title" id="cert_title" class="form-input" required placeholder="Please type as stated on your certificate (e.g. Diploma in Computer Science)."/>
+            </div>
+
+            <div class="form-group">
+                <label for="grade" class="form-label">Grade (CGPA) </label>
+                <input type="number" name="grade" id="grade" class="form-input" required />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="year_from" class="form-label">Year Start</label>
+                    <input type="date" name="year_from" id="year_from" class="form-input" required />
+                </div>
+                <div class="form-group">
+                    <label for="year_end" class="form-label">Year End</label>
+                    <input type="date" name="year_end" id="year_end" class="form-input" required />
+                </div>
+            </div>
+
+            <!-- Add & Reset Buttons -->
+            <div class="btn-row">
+                <button type="button" class="btn btn-add" onclick="addEducation()">Add</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+
+        <!-- Table for added data -->
+        <table id="educationTable">
+            <thead>
+                <tr>
+                    <th>Qualification</th>
+                    <th>Institution</th>
+                    <th>Cert. Title</th>
+                    <th>Grade (CGPA)</th>
+                    <th>Year Start</th>
+                    <th>Year End</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+                    <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Save & Next Section</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function addEducation() {
+        const qualification = document.getElementById("qualification").value;
+        const institution = document.getElementById("institution").value;
+        const cert_title = document.getElementById("cert_title").value;
+        const grade = document.getElementById("grade").value;
+        const yearFrom = document.getElementById("year_from").value;
+        const yearEnd = document.getElementById("year_end").value;
+
+        if (!qualification || !institution || !cert_title || !grade || !yearFrom || !yearEnd) {
+            alert("Please fill all fields before adding.");
+            return;
+        }
+
+        const table = document.getElementById("educationTable").querySelector("tbody");
+        const newRow = table.insertRow();
+
+        newRow.insertCell(0).textContent = qualification;
+        newRow.insertCell(1).textContent = institution;
+        newRow.insertCell(2).textContent = cert_title;
+        newRow.insertCell(3).textContent = grade;
+        newRow.insertCell(4).textContent = yearFrom;
+        newRow.insertCell(5).textContent = yearEnd;
+
+        const actionCell = newRow.insertCell(6);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.onclick = function () {
+            newRow.remove();
+        };
+        actionCell.appendChild(deleteBtn);
+
+        document.getElementById("educationForm").reset();
+    }
+</script>
+</body>
+</html>

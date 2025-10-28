@@ -1,0 +1,362 @@
+<html>
+
+<head>
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="css/job_app_form.css">
+</head>
+
+<body>
+<div class="main-container">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="form-wrapper">
+        <img src="https://meteor.com.my/wp-content/uploads/2020/09/logometeor.png" alt="Hiring Form Illustration" style="width: 200px; height: 100px; display: block; margin: 0 auto;" class="form-image" />
+        
+        <form action="qualification.html" method="POST" enctype="multipart/form-data">
+           
+            <!-- Title and Description -->
+            <div class="form-header">
+                <h2 class="form-title">JOB APPLICATION FORM</h2>
+                <!--<p class="form-description">
+                    Please fill out the form below to apply for the job. Fields
+                    with * are required.
+                </p>!-->
+            </div>
+
+            <div class="form-group">
+                <label for="job_applied" class="form-label">Position Applied For</label>
+                <input type="text" name="job_applied" id="job_applied" class="form-input" required />
+            </div>
+
+            <!-- Section Bar -->
+            <div class="section-bar">Personal Details</div>
+
+            <!-- Personal Details -->
+            <div class="form-group">
+                <label for="fullname" class="form-label">Full Name * </label>
+                <input type="text" name="fullname" id="fullname" class="form-input" placeholder="as in your Identification Card (I.C) " required />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nationality" class="form-label">Nationality</label>
+                    <select name="nationality" id="nationality" class="form-select" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Indonesia">Indonesian</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ic_new" class="form-label">I.C (New) </label>
+                    <input type="text" name="ic_new" id="ic_new" class="form-input" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="ic_old" class="form-label">I.C (Old) </label>
+                    <input type="text" name="ic_old" id="ic_old" class="form-input" required />
+                </div>
+                <div class="form-group">
+                    <label for="passport_no" class="form-label">Passport No. </label>
+                    <input type="text" name="passport_no" id="passport_no" class="form-input" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" name="email" id="email" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone Number *</label>
+                <input type="text" name="phone" id="phone" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+            <label for="current_location" class="form-label">Current Address *</label>
+            <input type="text" name="current_location" id="current_location" class="form-input" required />
+            </div>
+
+            <div class="form-row">
+            <div class="form-group">
+                <label for="current_city" class="form-label">City</label>
+                <input type="text" name="current_city" id="current_city" class="form-input" required />
+            </div>
+            <div class="form-group">
+                <label for="current_state" class="form-label">State</label>
+                <select name="current_state" id="current_state" class="form-select" required>
+                <option value="">-- Please Select --</option>
+                <option value="Wilayah Perseketuan Kuala Lumpur">Wilayah Perseketuan Kuala Lumpur</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Melaka">Melaka</option>
+                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="current_country" class="form-label">Country</label>
+                    <select name="current_country" id="current_country" class="form-select" required>
+                    <option value="">-- Please Select --</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Thailand">Thailand</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="current_postcode" class="form-label">Postcode</label>
+                    <input type="text" name="current_postcode" id="current_postcode" class="form-input" required />
+                </div>
+            </div>
+
+            <label class="form-label">
+                <input type="checkbox" id="sameAddress" /> Same as current address
+            </label></br>
+
+            <div id="permanentAddress">
+            <div class="form-group">
+                <label for="permanent_location" class="form-label">Permanent Address *</label>
+                <input type="text" name="permanent_location" id="permanent_location" class="form-input" required />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                <label for="permanent_city" class="form-label">City</label>
+                <input type="text" name="permanent_city" id="permanent_city" class="form-input" required />
+                </div>
+                <div class="form-group">
+                <label for="permanent_state" class="form-label">State</label>
+                <select name="permanent_state" id="permanent_state" class="form-select" required>
+                    <option value="">-- Please Select --</option>
+                    <option value="Wilayah Perseketuan Kuala Lumpur">Wilayah Perseketuan Kuala Lumpur</option>
+                    <option value="Selangor">Selangor</option>
+                    <option value="Melaka">Melaka</option>
+                    <option value="Negeri Sembilan">Negeri Sembilan</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                <label for="permanent_country" class="form-label">Country</label>
+                <select name="permanent_country" id="permanent_country" class="form-select" required>
+                    <option value="">-- Please Select --</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Thailand">Thailand</option>
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="permanent_postcode" class="form-label">Postcode</label>
+                <input type="text" name="permanent_postcode" id="permanent_postcode" class="form-input" required />
+                </div>
+            </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" name="dob" id="dob" class="form-input" required />
+                </div>
+                <div class="form-group">
+                    <label for="place_of_birth" class="form-label">Place of Birth </label>
+                    <input type="text" name="place_of_birth" id="place_of_birth" class="form-input" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sex" class="form-label">Sex</label>
+                    <select name="sex" id="sex" class="form-select" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="marital_status" class="form-label">Marital Status</label>
+                    <select name="marital_status" id="marital_status" class="form-select" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorcee / Divorced">Divorcee / Divorced</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="race" class="form-label">Race</label>
+                    <select name="race" id="race" class="form-input" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Malay">Malay</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Bumiputera Sabah">Bumiputera Sabah</option>
+                        <option value="Bumiputera Sarawak">Bumiputera Sarawak</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="other-race-group">
+                    <label for="other_race" class="form-label">Please specify</label>
+                    <input type="text" name="other_race" id="other_race" class="form-input" placeholder="Enter your race" />
+                </div>
+
+                <div class="form-group">
+                <label for="religion" class="form-label">Religion</label>
+                    <select name="religion" id="religion" class="form-input" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Christianity">Christianity</option>
+                        <option value="Buddhism">Buddhism</option>
+                        <option value="Hinduism">Hinduism</option>
+                        <option value="Sikhism">Sikhism</option>
+                        <option value="Taoism">Taoism</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden" id="other-religion-group">
+                    <label for="other_religion" class="form-label">Please specify</label>
+                    <input type="text" name="other_religion" id="other_religion" class="form-input" placeholder="Enter your religion" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="driving_license" class="form-label">Driving License</label>
+                    <select name="driving_license" id="driving_license" class="form-select" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="class_license" class="form-label">Class License</label>
+                    <input type="text" name="class_license" id="class_license" class="form-input" required />
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Save & Next Section</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    // Conditional Logic: Show extra fields for developer roles
+    /*document.getElementById("role").addEventListener("change", function () {
+        const techFields = document.getElementById("tech-fields");
+        if (this.value === "developer") {
+            techFields.classList.remove("hidden");
+        } else {
+            techFields.classList.add("hidden");
+        }
+    });*/
+
+    const sameCheckbox = document.getElementById("sameAddress");
+    const fields = ["location", "city", "state", "country", "postcode"];
+
+    // When checkbox state changes
+    sameCheckbox.addEventListener("change", function() {
+    const isChecked = this.checked;
+    
+    fields.forEach(field => {
+        const current = document.getElementById("current_" + field);
+        const permanent = document.getElementById("permanent_" + field);
+        
+        if (isChecked) {
+        permanent.value = current.value;
+        permanent.disabled = true;
+
+        // Keep updating if user edits current
+        current.addEventListener("input", syncFields);
+        current.addEventListener("change", syncFields);
+        } else {
+        permanent.value = "";
+        permanent.disabled = false;
+
+        // Remove event listener to stop syncing
+        current.removeEventListener("input", syncFields);
+        current.removeEventListener("change", syncFields);
+        }
+    });
+    });
+
+    // Function to sync current → permanent
+    function syncFields(e) {
+    const fieldName = e.target.id.replace("current_", "");
+    document.getElementById("permanent_" + fieldName).value = e.target.value;
+    }
+
+    const nationality = document.getElementById("nationality");
+    const icNew = document.getElementById("ic_new");
+    const icOld = document.getElementById("ic_old");
+    const passportNo = document.getElementById("passport_no");
+
+        function toggleFields() {
+        if (nationality.value === "Malaysia") {
+            // Malaysians → IC enabled, Passport disabled
+            icNew.disabled = false;
+            icOld.disabled = false;
+            passportNo.value = "";
+            passportNo.disabled = true;
+        } else {
+            // Non-Malaysians → Passport enabled, IC disabled
+            passportNo.disabled = false;
+            icNew.value = "";
+            icOld.value = "";
+            icNew.disabled = true;
+            icOld.disabled = true;
+        }
+    }
+
+    const raceSelect = document.getElementById("race");
+    const otherRaceGroup = document.getElementById("other-race-group");
+    const otherRaceInput = document.getElementById("other_race");
+
+    raceSelect.addEventListener("change", function () {
+        if (this.value === "Others") {
+        otherRaceGroup.classList.remove("hidden");
+        otherRaceInput.required = true;
+        } else {
+        otherRaceGroup.classList.add("hidden");
+        otherRaceInput.required = false;
+        otherRaceInput.value = "";
+        }
+    });
+
+    // Run on page load
+    toggleFields();
+
+    // Run when nationality changes
+    nationality.addEventListener("change", toggleFields);
+
+    const religionSelect = document.getElementById("religion");
+    const otherReligionGroup = document.getElementById("other-religion-group");
+    const otherReligionInput = document.getElementById("other_religion");
+
+    religionSelect.addEventListener("change", function () {
+        if (this.value === "Others") {
+        otherReligionGroup.classList.remove("hidden");
+        otherReligionInput.required = true;
+        } else {
+        otherReligionGroup.classList.add("hidden");
+        otherReligionInput.required = false;
+        otherReligionInput.value = "";
+        }
+    });
+
+</script>
+
+
+
+</body>
+</html>

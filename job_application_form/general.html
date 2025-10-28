@@ -1,0 +1,269 @@
+<html>
+<head>
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="css/job_app_form.css">
+</head>
+
+<body>
+<div class="main-container">
+    <div class="form-wrapper">
+        <img src="https://meteor.com.my/wp-content/uploads/2020/09/logometeor.png" alt="Hiring Form Illustration" style="width: 200px; height: 100px; display: block; margin: 0 auto;" class="form-image" />
+            <div class="form-header">
+                <h2 class="form-title">JOB APPLICATION FORM</h2>
+            </div>
+
+        <div class="section-bar">GENERAL</div>
+        <form id="generalQuesForm">
+            <div class="form-group">
+                <label class="form-label">1. Are you suffering from any serious illness or physical incapability?</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="illness_incapability" value="yes" class="form-radio" onclick="toggleG1Text()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="illness_incapability" value="no" class="form-radio" onclick="toggleG1Text()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="spec_illness_incapability" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please specify :</label>
+                    <input type="text" name="spec_illness_incapability" class="form-input" placeholder="Enter specify here" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">2. Have you ever been involved in any criminal case ?</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="criminal" value="yes" class="form-radio" onclick="toggleG2Text()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="criminal" value="no" class="form-radio" onclick="toggleG2Text()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="specCriminal" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please specify : :</label>
+                    <input type="text" name="specCriminal" class="form-input" placeholder="Enter state here" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">3. Have you ever been convicted on a disciplinary case during your current and previous employment?</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="disciplinary" value="yes" class="form-radio" onclick="toggleG3Text()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="disciplinary" value="no" class="form-radio" onclick="toggleG3Text()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="spec_disciplinary" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please specify :</label>
+                    <input type="text" name="spec_disciplinary" class="form-input" placeholder="Enter specify here" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">4. Have you previously attended an interview at METEOR group companies?</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="interview" value="yes" class="form-radio" onclick="toggleG4Text()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="interview" value="no" class="form-radio" onclick="toggleG4Text()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="spec_interview" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please specify :</label>
+                    <input type="text" name="spec_interview" class="form-input" placeholder="Enter specify here" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">5. Do you have any family, relatives or friends who working in METEOR Group subsidiaries (OUM, IPD, METEOR Properties or EMTECH?</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="relatives" value="yes" class="form-radio" onclick="toggleG5Text()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="relatives" value="no" class="form-radio" onclick="toggleG5Text()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="spec_relatives" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please specify :</label>
+                    <input type="text" name="spec_relatives" class="form-input" placeholder="Enter specify here : Name, Company, Dept/Unit" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notice_res" class="form-label">Resignation notice period from current employment: </label>
+                <input type="text" name="notice_res" id="notice_res" class="form-input" required />
+            </div>
+            
+            <button type="submit" class="submit-btn">Save & Next Section</button>
+        </form>
+
+        <form action="https://formbold.com/s/FORM_ID" id="refForm" method="POST" enctype="multipart/form-data">
+
+            <div class="section-bar">REFEREE</div>
+            <h5>List names of people (other than your friend) who can tell about you character and your work performance. Must be from your previous employment.</h5>
+
+            <div class="form-group">
+                <label for="ref_name" class="form-label">Name </label>
+                <input type="text" name="ref_name" id="ref_name" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="ref_occupation" class="form-label">Occupation </label>
+                <input type="text" name="ref_occupation" id="ref_occupation" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="ref_company_name" class="form-label"> Name of Company </label>
+                <input type="text" name="ref_company_name" id="ref_company_name" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="ref_phone_num" class="form-label">Phone Number </label>
+                <input type="number" name="ref_phone_num" id="ref_phone_num" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="ref_periodknown" class="form-label">Period Known </label>
+                <input type="number" name="ref_periodknown" id="ref_periodknown" class="form-input" required />
+            </div>
+
+            <div class="btn-row">
+                <button type="button" class="btn btn-add" onclick="addReff()">Add</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+
+            <table id="reffTable">
+                <thead>
+                    <tr>
+                        <th>Name </th>
+                        <th>Occupation</th>
+                        <th>Company Name</th>
+                        <th>Phone Number </th>
+                        <th>Period Known </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script>
+    function addReff() {
+        const ref_name = document.getElementById("ref_name").value;
+        const ref_occupation = document.getElementById("ref_occupation").value;
+        const ref_company_name = document.getElementById("ref_company_name").value;
+        const ref_phone_num= document.getElementById("ref_phone_num").value;
+        const ref_periodknown = document.getElementById("ref_periodknown").value;
+
+        if (!ref_name || !ref_occupation || !ref_company_name || !ref_phone_num || !ref_periodknown) {
+            alert("Please fill all fields before adding.");
+            return;
+        }
+
+        const table = document.getElementById("reffTable").querySelector("tbody");
+        const newRow = table.insertRow();
+
+        newRow.insertCell(0).textContent = ref_name;
+        newRow.insertCell(1).textContent = ref_occupation;
+        newRow.insertCell(2).textContent = ref_company_name;
+        newRow.insertCell(3).textContent = ref_phone_num;
+        newRow.insertCell(4).textContent = ref_periodknown;
+
+        const actionCell = newRow.insertCell(5);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.type = "button";
+        deleteBtn.onclick = function () {
+            newRow.remove();
+        };
+        actionCell.appendChild(deleteBtn);
+        
+        document.getElementById("refForm").reset();
+    }
+
+    function toggleG1Text() {
+        const yesOption = document.querySelector('input[name="illness_incapability"][value="yes"]');
+        const container = document.getElementById("spec_illness_incapability");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+
+    function toggleG2Text() {
+        const yesOption = document.querySelector('input[name="criminal"][value="yes"]');
+        const container = document.getElementById("specCriminal");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+
+    function toggleG3Text() {
+        const yesOption = document.querySelector('input[name="disciplinary"][value="yes"]');
+        const container = document.getElementById("spec_disciplinary");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+
+    function toggleG4Text() {
+        const yesOption = document.querySelector('input[name="interview"][value="yes"]');
+        const container = document.getElementById("spec_interview");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+
+    function toggleG5Text() {
+        const yesOption = document.querySelector('input[name="relatives"][value="yes"]');
+        const container = document.getElementById("spec_relatives");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="css/job_app_form.css">
+</head>
+
+<body>
+<div class="main-container">
+    <div class="form-wrapper">
+        <img src="https://meteor.com.my/wp-content/uploads/2020/09/logometeor.png" alt="Hiring Form Illustration" style="width: 200px; height: 100px; display: block; margin: 0 auto;" class="form-image" />
+
+        <form action="https://formbold.com/s/FORM_ID" method="POST" enctype="multipart/form-data">
+           
+            <!-- Title and Description -->
+            <div class="form-header">
+                <h2 class="form-title">JOB APPLICATION FORM</h2>
+            </div>
+
+            <div class="section-bar">RELATED DOCUMENT </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="passportPhoto" class="form-label">Upload Passport Photo (PDF)*</label>
+                <input type="file" name="passportPhoto" id="passportPhoto" accept=".pdf,.doc,.docx" class="form-input" required />
+            </div>
+            <div class="form-group">
+                <label for="resume" class="form-label">Upload Resume (PDF/DOC)*</label>
+                <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" class="form-input" required />
+            </div>
+
+            <!-- Vacancy Source -->
+            <div class="form-group">
+                <label class="form-label">From where did you know about vacancy?</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="vacancy" value="Newspaper" class="form-radio" onclick="showSpecify('spec_vacancy')" />
+                        Newspaper
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="vacancy" value="Employment Agency" class="form-radio" onclick="showSpecify('spec_vacancy')" />
+                        Employment Agency
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="vacancy" value="Others" class="form-radio" onclick="showSpecify('spec_vacancy')" />
+                        Others
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="spec_vacancy" style="display:none; margin-top:10px;">
+                    <label class="form-label">Please specify :</label>
+                    <input type="text" name="spec_vacancy" class="form-input" placeholder="Enter specify here" />
+                </div>
+            </div>
+
+            <!-- Consent Checkbox -->
+            <div class="consent-group">
+                <input type="checkbox" id="consentCheckbox" class="form-checkbox" required />
+                <label for="consentCheckbox" class="consent-label">
+                     I hereby confirmed that all information given and attached documents are true and accurate. 
+                     I understand that if any of this found fraudulent, my employment will be terminated automatically.
+                    <!--<a href="#">data policy</a> and
+                    <a href="#">terms & conditions</a>.-->
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Generic function to show/hide text field
+    function showSpecify(targetId) {
+        const container = document.getElementById(targetId);
+        container.style.display = "block";
+    }
+</script>
+
+</body>
+</html>

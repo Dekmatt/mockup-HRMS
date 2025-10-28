@@ -1,0 +1,205 @@
+<html>
+<head>
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="css/job_app_form.css">
+</head>
+
+<body>
+<div class="main-container">
+    <div class="form-wrapper">
+        <img src="https://meteor.com.my/wp-content/uploads/2020/09/logometeor.png" alt="Hiring Form Illustration" style="width: 200px; height: 100px; display: block; margin: 0 auto;" class="form-image" />
+        <form id="languageForm">
+            <div class="form-header">
+                <h2 class="form-title">JOB APPLICATION FORM</h2>
+            </div>
+
+            <div class="section-bar">LANGUAGE PROFICIENCY</div>
+
+            <div class="form-group">
+                <label for="language" class="form-label">Language</label>
+                <input type="text" name="language" id="language" class="form-input" required />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="written" class="form-label">Written</label>
+                    <select name="written" id="written" class="form-select" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Fluent">Fluent</option>
+                        <option value="Proficient">Proficient</option>
+                        <option value="Conversational">Conversational</option>
+                        <option value="Basic">Basic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="oral" class="form-label">Oral</label>
+                    <select name="oral" id="oral" class="form-select" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="Fluent">Fluent</option>
+                        <option value="Proficient">Proficient</option>
+                        <option value="Conversational">Conversational</option>
+                        <option value="Basic">Basic</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Add & Reset Buttons -->
+            <div class="btn-row">
+                <button type="button" class="btn btn-add" onclick="addLanguage()">Add</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+            </div>
+
+        <!-- Table for added data -->
+        <table id="languageTable">
+            <thead>
+                <tr>
+                    <th>Languange</th>
+                    <th>Written</th>
+                    <th>Oral</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        </form>
+
+        <form id="careerObjecktiveForm">
+            <div class="section-bar">CAREER OBJECTIVE</div>
+
+            <div class="form-group">
+                <label for="language" class="form-label">What is your carrer objective?</label>
+                <input type="text" name="carrerObjective" id="carrerObjective" class="form-input" required />
+            </div>
+        </form>
+
+        <form id="computerskillForm">
+            <div class="section-bar">COMPUTER & DIGITAL SKILL</div>
+
+            <div class="form-group">
+                <label for="computer_skill" class="form-label">Please Specify</label>
+                <input type="text" name="computer_skill" id="computer_skill" class="form-input" required placeholder="e.g: Microsoft Office, Microsoft Excel"/>
+            </div>
+        </form>
+
+        <form id="benefitForm"></form>
+            <div class="section-bar">COMPENSATION & BENEFIT</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="currentSalary" class="form-label">Current Salary (per month))</label>
+                        <input type="number" name="currentSalary" id="currentSalary" class="form-input" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedSalary" class="form-label">Expected Salary (per month))</label>
+                        <input type="number" name="expectedSalary" id="expectedSalary" class="form-input" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="benefit" class="form-label">Please list down the fringe benefits that you are entitled at present : (E.g: Bonuses, Allowance, Company Car, etc)</label>
+                    <input type="text" name="benefit" id="benefit" class="form-input" required />
+                </div>
+        </form>
+        <form id="questionForm">
+            <div class="form-group">
+                <label class="form-label">Are you a student of METEOR Group subsidiaries? (OUM , IPD)</label>
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="student" value="yes" class="form-radio" onclick="toggleStudentText()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="student" value="no" class="form-radio" onclick="toggleStudentText()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="specifySem_course" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please specify semester/Course Taken :</label>
+                    <input type="text" name="specifySem_course" class="form-input" placeholder="Enter specify here" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">For Female Applicant, Are you pregnant at present?</label>
+                <!--<label class="form-label">Are you pregnant at present? </label>-->
+                <div class="checkbox-group">
+                    <label class="consent-label">
+                        <input type="radio" name="pregnant" value="yes" class="form-radio" onclick="togglePregText()" />
+                        Yes
+                    </label>
+                    <label class="consent-label">
+                        <input type="radio" name="pregnant" value="no" class="form-radio" onclick="togglePregText()" />
+                        No
+                    </label>
+                </div>
+
+                <!-- Hidden text field -->
+                <div id="statedue_preg" style="display:none; margin-top:10px;">
+                    <label class="form-label">If yes, Please state your due date for delivery :</label>
+                    <input type="text" name="statedue_preg" class="form-input" placeholder="Enter state here" />
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Save & Next Section</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function addLanguage() {
+        const language = document.getElementById("language").value;
+        const written = document.getElementById("written").value;
+        const oral = document.getElementById("oral").value;
+
+        if (!language || !written || !oral) {
+            alert("Please fill all fields before adding.");
+            return;
+        }
+
+        const table = document.getElementById("languageTable").querySelector("tbody");
+        const newRow = table.insertRow();
+
+        newRow.insertCell(0).textContent = language;
+        newRow.insertCell(1).textContent = written;
+        newRow.insertCell(2).textContent = oral;
+
+        const actionCell = newRow.insertCell(3);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.type = "button";
+        deleteBtn.onclick = function () {
+            newRow.remove();
+        };
+        actionCell.appendChild(deleteBtn);
+        
+        document.getElementById("languageForm").reset();
+    }
+
+    function toggleStudentText() {
+        const yesOption = document.querySelector('input[name="student"][value="yes"]');
+        const container = document.getElementById("specifySem_course");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+
+    function togglePregText() {
+        const yesOption = document.querySelector('input[name="pregnant"][value="yes"]');
+        const container = document.getElementById("statedue_preg");
+
+        if (yesOption.checked) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
