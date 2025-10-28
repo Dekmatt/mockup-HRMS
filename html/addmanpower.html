@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Employee Requisition Form</title>
+
+  <style>
+    :root {
+      --accent: #4f46e5;
+      --accent-light: #6366f1;
+      --muted: #6b7280;
+      --bg: #f9fafb;
+      --white: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: #111827;
+      display: flex;
+      margin: 0;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 250px;
+      background: #243a8c;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar-profile {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .profile-avatar {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-info h2 {
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .profile-info h3 {
+      font-size: 13px;
+      color: #e0e7ff;
+      font-weight: 400;
+    }
+
+    .sidebar-search {
+      padding: 10px 15px;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      border-radius: 6px;
+      padding: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 30px 0;
+    }
+
+    .sidebar-menu a {
+      display: block;
+      padding: 10px 18px;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.2s, padding-left 0.2s;
+    }
+
+    .sidebar-menu a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      padding-left: 24px;
+    }
+
+    .sidebar-menu .dropdown {
+      position: relative;
+    }
+
+    .sidebar-menu .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-menu .dropdown-menu {
+      list-style: none;
+      padding-left: 25px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+    }
+
+    .sidebar-menu .dropdown.active .dropdown-menu {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .sidebar-menu .dropdown-toggle .icon::after {
+      content: "▼";
+      font-size: 10px;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-menu .dropdown.active .dropdown-toggle .icon::after {
+      transform: rotate(180deg);
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      margin-left: 260px;
+      padding: 24px;
+      width: calc(100% - 260px);
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .form-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      color: #4f46e5;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    p {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    fieldset {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    legend {
+      font-weight: 600;
+      color: #374151;
+      padding: 0 10px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .form-section {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 6px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #4f46e5;
+      outline: none;
+    }
+
+    .form-actions {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    button {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+
+    button[type="submit"] {
+      background: #4f46e5;
+      color: white;
+    }
+
+    button[type="submit"]:hover {
+      background: #4338ca;
+    }
+
+    .reset-btn {
+      background: #9ca3af;
+      color: white;
+      margin-left: 10px;
+    }
+
+    .reset-btn:hover {
+      background: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <img class="profile-avatar" alt="Avatar"
+        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><circle cx='32' cy='32' r='32' fill='%23ffffff33'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='28'>F</text></svg>" />
+      <div class="profile-info">
+        <h2>Fatihah</h2>
+        <h3>INT3 - Intern</h3>
+      </div>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" placeholder="Search..." aria-label="Search" />
+    </div>
+
+    <ul class="sidebar-menu">
+      <li><a href="home.html">🏠 Home</a></li>
+      <li><a href="organizational.html">🏢 Organizational</a></li>
+      <li><a href="profile.html">👤 Profile</a></li>
+      <li><a href="attendance.html">📅 Attendance</a></li>
+      <li><a href="leave.html">✈️ Leave</a></li>
+      <li><a href="benefit&claim.html">💳 Benefit & Claim</a></li>
+      <li><a href="overtime.html">⏰ Overtime</a></li>
+      <li><a href="payrollside.html">💰 Payroll</a></li>
+      <li><a href="learn&develop.html">🎓 Learn & Develop</a></li>
+      <li><a href="HRAdmin.html">⚙️ HR Admin</a></li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">🔍 Recruitment <span class="icon"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="recruitment.html">📊 Dashboard</a></li>
+          <li><a href="vacancy.html">📁 Employee Requisition</a></li>
+          <li><a href="applicants.html">👥 Applicants</a></li>
+          <li><a href="interviews.html">🗓️ Interviews</a></li>
+          <li><a href="reports.html">📄 Reports</a></li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="form-container">
+      <h2>Employee Requisition Form</h2>
+      <p>Please fill in the details below to request for a new employee.</p>
+
+      <form id="requisitionForm">
+        <div class="form-row">
+          <!-- LEFT SIDE -->
+          <div class="form-section">
+            <fieldset>
+              <legend>Requisition Details</legend>
+
+              <div class="form-group">
+                <label for="reqDate">Requisition Date *</label>
+                <input type="date" id="reqDate" name="reqDate" required>
+              </div>
+
+              <div class="form-group">
+                <label for="requestedBy">Requested By *</label>
+                <input type="text" id="requestedBy" name="requestedBy" placeholder="e.g. John Ahmad" required>
+              </div>
+
+              <div class="form-group">
+                <label for="department">Department *</label>
+                <select id="department" name="department" required>
+                  <option value="">-- Select Department --</option>
+                  <option>Human Resource</option>
+                  <option>Finance</option>
+                  <option>IT</option>
+                  <option>Marketing</option>
+                  <option>Operations</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="positionTitle">Position Title *</label>
+                <input type="text" id="positionTitle" name="positionTitle" placeholder="e.g. Software Engineer" required>
+              </div>
+
+              <div class="form-group">
+                <label for="employmentType">Employment Type *</label>
+                <select id="employmentType" name="employmentType" required>
+                  <option value="">-- Select Type --</option>
+                  <option>Permanent</option>
+                  <option>Contract</option>
+                  <option>Internship</option>
+                  <option>Part-Time</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="noOfVacancies">Number of Vacancies *</label>
+                <input type="number" id="noOfVacancies" name="noOfVacancies" min="1" required>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- RIGHT SIDE -->
+          <div class="form-section">
+            <fieldset>
+              <legend>Job Details</legend>
+
+              <div class="form-group">
+                <label for="jobDescription">Job Description *</label>
+                <textarea id="jobDescription" name="jobDescription" rows="3"
+                  placeholder="Briefly describe job responsibilities..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="qualification">Required Qualification *</label>
+                <input type="text" id="qualification" name="qualification" placeholder="e.g. Diploma in Computer Science"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="experience">Required Experience</label>
+                <input type="text" id="experience" name="experience" placeholder="e.g. Minimum 2 years working experience">
+              </div>
+
+              <div class="form-group">
+                <label for="skills">Required Skills</label>
+                <input type="text" id="skills" name="skills" placeholder="e.g. Communication, JavaScript, teamwork">
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- APPROVAL SECTION BELOW -->
+        <fieldset>
+          <legend>Approval Details</legend>
+
+          <div class="form-group">
+            <label for="justification">Justification *</label>
+            <textarea id="justification" name="justification" rows="3"
+              placeholder="Explain why this position is needed..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="budgetStatus">Budget Availability *</label>
+            <select id="budgetStatus" name="budgetStatus" required>
+              <option value="">-- Select Option --</option>
+              <option>Budgeted</option>
+              <option>Non-Budgeted</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="approvalBy">To Be Approved By</label>
+            <input type="text" id="approvalBy" name="approvalBy" placeholder="e.g. Head of Department">
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit">Submit Requisition</button>
+          <button type="reset" class="reset-btn">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        const parent = this.closest('.dropdown');
+        parent.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

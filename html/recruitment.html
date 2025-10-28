@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recruitment Dashboard</title>
+  <style>
+    :root {
+      --accent: #4f46e5;
+      --accent-light: #6366f1;
+      --muted: #6b7280;
+      --bg: #f9fafb;
+      --white: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: #111827;
+      display: flex;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ========================= SIDEBAR ========================= */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 250px;
+      background: #243a8c;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #94a3b8 transparent;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background-color: #94a3b8;
+      border-radius: 4px;
+    }
+
+    .sidebar-profile {
+      padding: 10px 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .profile-avatar {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-info h2 {
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .profile-info h3 {
+      font-size: 13px;
+      color: #e0e7ff;
+      font-weight: 400;
+    }
+
+    .sidebar-search {
+      padding: 10px 15px;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      border-radius: 6px;
+      padding: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 30px 0;
+    }
+
+    .sidebar-menu li {
+      list-style: none;
+    }
+
+    .sidebar-menu a {
+      display: block;
+      padding: 10px 18px;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.2s, padding-left 0.2s;
+    }
+
+    .sidebar-menu a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      padding-left: 24px;
+    }
+
+    /* ========================= DROPDOWN ========================= */
+    .sidebar-menu .dropdown {
+      position: relative;
+    }
+
+    .sidebar-menu .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-menu .dropdown-menu {
+      list-style: none;
+      padding-left: 25px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+    }
+
+    .sidebar-menu .dropdown-menu li a {
+      display: block;
+      padding: 8px 12px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .sidebar-menu .dropdown-menu li a:hover {
+      color: #fff;
+    }
+
+    .sidebar-menu .dropdown.active .dropdown-menu {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .sidebar-menu .dropdown.active .dropdown-toggle .icon::after {
+      transform: rotate(180deg);
+    }
+
+    .sidebar-menu .dropdown-toggle .icon::after {
+      content: "▼";
+      font-size: 10px;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    /* ========================= MAIN CONTENT ========================= */
+    .container {
+      margin-left: 260px;
+      padding: 24px;
+      width: calc(100% - 260px);
+      overflow-y: auto;
+    }
+
+    .biodata-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      padding: 20px 28px;
+      font-size: 22px;
+      font-weight: 700;
+      border-radius: 14px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 6px var(--shadow);
+    }
+
+    /* ========================= DASHBOARD CARDS ========================= */
+    .dashboard-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: nowrap;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      flex: 1;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 10px var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h4 {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card .count {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .card small {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .card a.more-info {
+      margin-top: 15px;
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .card a.more-info:hover {
+      color: var(--accent-light);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-cards {
+        flex-wrap: wrap;
+      }
+
+      .card {
+        flex: 1 1 calc(50% - 10px);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        flex: 1 1 100%;
+      }
+    }
+
+    /* ========================= TABLE SECTION ========================= */
+    .table-section {
+      margin-top: 25px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+      padding: 20px;
+    }
+
+    /* Header with button */
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .table-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2b6cb0;
+    }
+
+    .add-btn {
+      background: #2b6cb0;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 980px;
+      transition: background 0.3s ease;
+    }
+
+    .add-btn:hover {
+      background: #1e4e8c;
+    }
+
+    /* Table styling */
+    .recruitment-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .recruitment-table thead {
+      background: #e2e8f0;
+    }
+
+    .recruitment-table th,
+    .recruitment-table td {
+      text-align: center;
+      padding: 10px 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .recruitment-table th {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .recruitment-table tr:hover {
+      background: #f8fafc;
+      transition: background 0.2s ease;
+    }
+
+    .view-btn {
+      background: #2b6cb0;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .view-btn:hover {
+      background: #1e4e8c;
+    }
+    </style>
+
+</head>
+
+<body>
+  <!-- ========================= SIDEBAR ========================= -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <img class="profile-avatar" alt="Avatar"
+        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><circle cx='32' cy='32' r='32' fill='%23ffffff33'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='28'>F</text></svg>" />
+      <div class="profile-info">
+        <h2>Fatihah</h2>
+        <h3>INT3 - Intern</h3>
+      </div>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" placeholder="Search..." aria-label="Search" />
+    </div>
+
+    <ul class="sidebar-menu">
+      <li><a href="home.html">🏠 Home</a></li>
+      <li><a href="organizational.html">🏢 Organizational</a></li>
+      <li><a href="profile.html">👤 Profile</a></li>
+      <li><a href="attendance.html">📅 Attendance</a></li>
+      <li><a href="leave.html">✈️ Leave</a></li>
+      <li><a href="benefit&claim.html">💳 Benefit & Claim</a></li>
+      <li><a href="overtime.html">⏰ Overtime</a></li>
+      <li><a href="payrollside.html">💰 Payroll</a></li>
+      <li><a href="learn&develop.html">🎓 Learn & Develop</a></li>
+      <li><a href="HRAdmin.html">⚙️ HR Admin</a></li>
+
+      <!-- DROPDOWN MENU -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">🔍 Recruitment <span class="icon"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="recruitment.html">📊 Dashboard</a></li>
+          <li><a href="manpower.html">📁 Employee Requisition</a></li>
+          <li><a href="applicants.html">👥 Applicants</a></li>
+          <li><a href="interviews.html">🗓️ Interviews</a></li>
+          <li><a href="reports.html">📄 Reports</a></li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ========================= MAIN CONTAINER ========================= -->
+  <div class="container">
+    <h2>Recruitment Dashboard</h2>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <h4>Total Vacancies</h4>
+        <div class="count">12</div>
+        <small>Active job posts</small>
+        <a href="vacancy.html" class="more-info">More Info →</a>
+      </div>
+
+      <div class="card">
+        <h4>Total Applicants</h4>
+        <div class="count">248</div>
+        <small>Across all vacancies</small>
+        <a href="applicants.html" class="more-info">More Info →</a>
+      </div>
+
+      <div class="card">
+        <h4>Interviews Scheduled</h4>
+        <div class="count">36</div>
+        <small>Pending this week</small>
+        <a href="interviews.html" class="more-info">More Info →</a>
+      </div>
+
+      <div class="card">
+        <h4>Positions Filled</h4>
+        <div class="count">8</div>
+        <small>Successfully hired</small>
+        <a href="reports.html" class="more-info">More Info →</a>
+      </div>
+    </div>
+
+    <!-- ========================= TABLE SECTION ========================= -->
+    <h2>List of Approved New Staff</h2>
+    <!--<button class="add-btn"> + Add List</button>-->
+    <div class="table-section">
+      <table class="recruitment-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Department Name</th>
+            <th>No. Approved New Staff</th>
+            <th>No. of Replacement Staff</th>
+            <th>Total Available</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Human Resource</td>
+            <td>3</td>
+            <td>1</td>
+            <td>4</td>
+            <td><button class="view-btn">View</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Finance</td>
+            <td>2</td>
+            <td>2</td>
+            <td>4</td>
+            <td><button class="view-btn">View</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>IT Department</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td><button class="view-btn">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</body>
+  <script>
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+      toggle.addEventListener('click', e => {
+        e.preventDefault();
+        const parent = toggle.parentElement;
+        parent.classList.toggle('active');
+        document.querySelectorAll('.dropdown').forEach(item => {
+          if (item !== parent) item.classList.remove('active');
+        });
+      });
+    });
+  </script>
+
+</html>
